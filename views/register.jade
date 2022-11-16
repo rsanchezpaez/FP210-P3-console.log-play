@@ -1,0 +1,51 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet' href='bootstrap/bootstrap.css')
+    
+  body
+    .wrapper-register
+        .wrapper-picker 
+            #wrapper-selector 
+                #avatar-selector 
+                    .avatar-row
+                        .avatar-item 
+                            img#item-1.avatar(src="/images/guerrera.png", alt="")
+                        .avatar-item 
+                            img#item-2.avatar(src="/images/guerrero.png", alt="")
+                        .avatar-item 
+                            img#item-3.avatar(src="/images/arquera.png", alt="")
+                        .avatar-item 
+                            img#item-4.avatar(src="/images/arquero.png", alt="")
+                    .avatar-row
+                        .avatar-item 
+                            img#item-5.avatar(src="/images/maga.png", alt="")
+                        .avatar-item 
+                            img#item-6.avatar(src="/images/mago.png", alt="")
+                        .avatar-item 
+                            img#item-7.avatar(src="/images/monstrua.png", alt="")
+                        .avatar-item 
+                            img#item-8.avatar(src="/images/monstruo.png", alt="")
+            .mb-3 
+                .avatr-wrapper 
+                    #avatar-picker.avatar-content 
+                        img#avatarChoose.avatar(src="/images/guerrera.png", alt="")
+                .mb-3.row 
+                    label.col-sm-2.col-form-label.text-light Name 
+                    .col-sm-9.px-4 
+                        input#name.form-control(type=text name=name)
+                .mb-3.row 
+                    label.col-sm-2.col-form-label.text-light Email 
+                    .col-sm-9.px-4 
+                        input#email.form-control(type=text name=email)
+                .mb-3.row 
+                    label.col-sm-2.col-form-label.text-light Password
+                    .col-sm-9.px-4 
+                        input#password.form-control(type=text name=password)
+                .d-grip.gap-2 
+                    button#submit-button.btn.btn-primary.btn-outline-warning(type="submit") Sign up 
+                #helper.helper-wrapper 
+                    .helper-content 
+                        p.text-helper The data entered is incorrect
+script(src="/javascripts/register.js")   

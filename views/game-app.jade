@@ -1,0 +1,67 @@
+extends layout
+
+block content
+    #wrapper-main 
+        .wrapper-header
+            .wrapper-log-out
+                span#log-out
+                    | Log out
+                    i.fa.fa-sign-out.fa-lg(style='color: white')        
+        .wrapper-content
+            .wrapper-info 
+                .wrapper-user 
+                    #avatar-picker(ondrop='drop(event)' ondragover='allowDrop(event)')
+                        span#user-name
+                        img#avatarChoose(draggable='true' ondragstart='drag(event)' src='')
+                        i#avatarChange.fas.fa-caret-square-down
+                    #wrapper-selector 
+                        #avatar-selector 
+                            .avatar-row 
+                                .avatar-item 
+                                    img#item-1.avatar(src="/images/guerrera.png", alt="")
+                                .avatar-item 
+                                    img#item-2.avatar(src="/images/guerrero.png", alt="")
+                                .avatar-item 
+                                    img#item-3.avatar(src="/images/arquera.png", alt="")
+                                .avatar-item 
+                                    img#item-4.avatar(src="/images/arquero.png", alt="")
+                            .avatar-row
+                                .avatar-item 
+                                    img#item-5.avatar(src="/images/maga.png", alt="")
+                                .avatar-item 
+                                    img#item-6.avatar(src="/images/mago.png", alt="")
+                                .avatar-item 
+                                    img#item-7.avatar(src="/images/monstrua.png", alt="")
+                                .avatar-item 
+                                    img#item-8.avatar(src="/images/monstruo.png", alt="")
+                    h1 Welcome to console.log(play) game 
+                    .wrapper-helper 
+                        span To start playing choose a room.
+                        span In each room you can play up to two players maximum.
+                        span Drag an drop your avatar to choose one room.
+                        span 
+                            i.fas.fa-lg.fa-user-friends
+                            | Room is full 
+                            i.fas.fa-lg.fa-user-alt
+                            | One person in the room  
+                            i.fas.fa-lg.fa-user-alt-slash
+                            | Room is empty
+            .wrapper-rooms 
+                #containerRooms.container-rooms
+                    .wrapper-container 
+                        .wrapper-ocupation 
+                            i#oroom1 
+                        #room1.room(ondrop='drop(event)' ondragover='allowDrop(event)')
+                    .wrapper-container
+                        .wrapper-ocupation
+                            i#oroom2(style='')
+                        #room2.room(ondrop='drop(event)' ondragover='allowDrop(event)')
+                    .wrapper-container
+                        .wrapper-ocupation
+                            i#oroom3(style='')
+                        #room3.room(ondrop='drop(event)' ondragover='allowDrop(event)')  
+    #myModal.modal.fade(role='dialog')
+block scripts
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js") 
+    script(src="/javascripts/game-app.js")
+   

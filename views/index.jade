@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  .wrapper-main 
+    .wrapper-content 
+      #helper.helper-wrapper 
+        .helper-content 
+          p The username os password is incorrect or the user doesn't exists 
+      .mb-3.row
+        label.col-sm-2.col-form-label.text-light Email
+        .col-sm-9.px-4 
+          input#email.form-control(type=text name="email")
+      .mb-3.row 
+        label.col-sm-2.col-form-label.text-light Password
+        .col-sm-9.px-4 
+          input#password.form-control(type=text name="password")
+      .d-grip.gap-2
+        button#login.btn.btn-primary.btn-outline-warning Log in
+      .wrapper-register-login 
+        p Don't have account? <a href="/register">Create one</a> 
+block scripts
+  script(src="/javascripts/login.js")   
