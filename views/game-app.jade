@@ -61,7 +61,15 @@ block content
                             i#oroom3(style='')
                         #room3.room(ondrop='drop(event)' ondragover='allowDrop(event)')  
     #myModal.modal.fade(role='dialog')
+        .modal-dialog
+            .modal-content
+                .modal-header(style='background-color:rgb(174, 253, 140)')
+                    button.close(type='button' data-dismiss='modal') ×
+                    h4.modal-title Console.log(play)
+                .modal-body(style='background-color:#ffffe6')
+                    p#alert-text
+    
 block scripts
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js") 
     script(src="/javascripts/game-app.js")
-   
+    

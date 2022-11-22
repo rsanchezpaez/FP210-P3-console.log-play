@@ -6,7 +6,6 @@
         
 
         avatarPicker.addEventListener("click", function () {
-            console.log("pressed")
             document.getElementById('wrapper-selector').style.display = 'flex';
             pressed = true;
 
@@ -59,9 +58,7 @@
 
         var input = document.getElementsByClassName("form-control");
         for (var i = 0; i < input.length; i++) {
-            console.log(input[i]);
             input[i].addEventListener("click", function () {
-                console.log('pressedinput')
                 document.getElementById('wrapper-selector').style.display = 'none';
             })
         }
@@ -74,7 +71,6 @@
             var username = document.getElementById('email').value;
             var password = document.getElementById('password').value;
             var name = document.getElementById('name').value;
-            console.log(username,password, name)
 
             fetch('/validated-register', {
                 method: 'POST',
@@ -85,7 +81,6 @@
                     password: password
                 })
             }).then(response => {
-                console.log(response)
                 if (response.ok) {
                     var newObject = {
                         'name': name,
