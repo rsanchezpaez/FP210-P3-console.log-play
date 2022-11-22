@@ -1,11 +1,10 @@
 
 
+    var mymodal = $('myModal');
         //MODAL POPUP
         $('#myModal').on('click', 'button.close', function (eventObject) {
             $('#myModal').modal('hide');
         });
-
-        console.log("js")
 
         //DATA LOCALSTORAGE
         var user = JSON.parse(localStorage.getItem('User'));
@@ -30,7 +29,7 @@
                         'room3': false
                     }
                     localStorage.setItem('User', JSON.stringify(userLogOut))
-                    window.location.assign(response.url)
+                    window.location.assign("/")
                 }
             })
         })
@@ -186,26 +185,29 @@
         */
         function checkOcupation(room) {
             fetch('/ocupationcheck?room=' + room + '&user=' + user.username).then(response => {
+                //vacia
                 if (response.status == 200) {
-                    document.getElementById('o' + room).classList.add("fas");
-                    document.getElementById('o' + room).classList.add("fa-user-alt-slash");
-                    document.getElementById('o' + room).classList.remove("fa-user-alt");
-                    document.getElementById('o' + room).classList.remove("fa-user-friends");
+                    document.getElementById('o' + room).classList.add("fa");
+                    document.getElementById('o' + room).classList.add("fa-user-times");
+                    document.getElementById('o' + room).classList.remove("fa-user");
+                    document.getElementById('o' + room).classList.remove("fa-users");
                     document.getElementById('o' + room).classList.add("fa-2x");
 
                 }
+                //1persona
                 else if (response.status == 201) {
-                    document.getElementById('o' + room).classList.add("fas");
-                    document.getElementById('o' + room).classList.add("fa-user-alt");
-                    document.getElementById('o' + room).classList.remove("fa-user-alt-slash");
-                    document.getElementById('o' + room).classList.remove("fa-user-friends");
+                    document.getElementById('o' + room).classList.add("fa");
+                    document.getElementById('o' + room).classList.add("fa-user");
+                    document.getElementById('o' + room).classList.remove("fa-user-times");
+                    document.getElementById('o' + room).classList.remove("fa-users");
                     document.getElementById('o' + room).classList.add("fa-2x");
                 }
-                else if (response.status == 404) {
+                //los dos
+                else if (response.status == 401) {
                     document.getElementById('o' + room).classList.add("fa");
                     document.getElementById('o' + room).classList.add("fa-users");
-                    document.getElementById('o' + room).classList.remove("fa-user-alt");
-                    document.getElementById('o' + room).classList.remove("fa-user-alt-slash");
+                    document.getElementById('o' + room).classList.remove("fa-user");
+                    document.getElementById('o' + room).classList.remove("fa-user-times");
                     document.getElementById('o' + room).classList.add("fa-2x");
 
                 }
@@ -213,13 +215,11 @@
             })
         }
 
-        
+    
         setInterval(function () { checkOcupation("room1", user.username) }, 1000);
         setInterval(function () { checkOcupation("room2", user.username) }, 1000);
         setInterval(function () { checkOcupation("room3", user.username) }, 1000);
-
-        
-        
+    
 
         
         $(document).ready(function () {

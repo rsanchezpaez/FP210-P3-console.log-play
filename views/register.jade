@@ -1,11 +1,7 @@
-doctype html
-html
-  head
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet' href='bootstrap/bootstrap.css')
-    
-  body
-    .wrapper-register
+extends layout
+
+block content
+    .wrapper-main
         .wrapper-picker 
             #wrapper-selector 
                 #avatar-selector 
@@ -28,7 +24,7 @@ html
                         .avatar-item 
                             img#item-8.avatar(src="/images/monstruo.png", alt="")
             .mb-3 
-                .avatr-wrapper 
+                .avatar-wrapper 
                     #avatar-picker.avatar-content 
                         img#avatarChoose.avatar(src="/images/guerrera.png", alt="")
                 .mb-3.row 
@@ -44,8 +40,9 @@ html
                     .col-sm-9.px-4 
                         input#password.form-control(type=text name=password)
                 .d-grip.gap-2 
-                    button#submit-button.btn.btn-primary.btn-outline-warning(type="submit") Sign up 
+                    button#submit-button.btn.btn-primary.btn-outline-warning.btn.block(type="submit") Sign up 
                 #helper.helper-wrapper 
                     .helper-content 
                         p.text-helper The data entered is incorrect
-script(src="/javascripts/register.js")   
+block scripts 
+    script(src="/javascripts/register.js")   

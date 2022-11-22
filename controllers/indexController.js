@@ -1,7 +1,7 @@
 const users = require('../models/UserRegisters').usersDB;
 
 function init(rel,res,next){
-  res.render('index', {title: 'Prueba', name: 'login.css'});
+  res.render('index', {name: 'login.css'});
   res.end();
 }
 

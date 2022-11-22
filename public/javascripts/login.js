@@ -1,8 +1,7 @@
-console.log("hola")
+
 var boton = document.querySelector("#login");
-console.log(boton)
+
 boton.addEventListener('click', function () {
-    console.log("login")
     var username = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
