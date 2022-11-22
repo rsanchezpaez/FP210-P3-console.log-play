@@ -36,102 +36,106 @@ function getCursorPosition(canvas, event, cw) {
   const y = event.clientY - rect.top;
   let cy = (y + (cw - (y % cw))) / cw;
   let cx = (x + (cw - (x % cw))) / cw;
-  console.log("x: " + cx + " y: " + cy, cx * 80 - 80, cy * 80 - 80);
+  let py= cy * 80 - 80;
+  let px = cx * 80 - 80;
+  console.log("x: " + cx + " y: " + cy, px, py);
 
   var context2 = canvas.getContext("2d");
   context2.beginPath();
-  //context2.fillStyle = "red";
+  context2.fillStyle = "blue";
   
   console.log(`Clicada posición x = ${cx} y y = ${cy}`);
-
   
-  /*
-  if (cx === 1 && cy === 1) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+  context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
+
+  /*for (let cx = 1; cx < 6; cx++) { 
+    for (let cy = 0; cy < 6; cy++) { 
+    }
+    
   }*/
 
   /*if (cx === 1 && cy === 1) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
-  }
-  if (cx === 1 && cy === 2) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
 
+  if (cx === 1 && cy === 2) {
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
+  }
   if (cx === 1 && cy === 3) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 1 && cy === 4) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 1 && cy === 5) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
 
   if (cx === 2 && cy === 1) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 2 && cy === 2) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
-
   if (cx === 2 && cy === 3) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 2 && cy === 4) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 2 && cy === 5) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
+  
   if (cx === 3 && cy === 1) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 3 && cy === 2) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
 
   if (cx === 3 && cy === 3) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 3 && cy === 4) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 3 && cy === 5) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
 
   if (cx === 4 && cy === 1) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 4 && cy === 2) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
 
   if (cx === 4 && cy === 3) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 4 && cy === 4) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 4 && cy === 5) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
 
   if (cx === 5 && cy === 1) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 5 && cy === 2) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
 
   if (cx === 5 && cy === 3) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 5 && cy === 4) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }
   if (cx === 5 && cy === 5) {
-    console.log(`Clicada posición x = ${cx} y y = ${cy}`);
+    context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
   }*/
 }
 
