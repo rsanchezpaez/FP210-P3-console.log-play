@@ -42,12 +42,12 @@ function getCursorPosition(canvas, event, cw) {
 
   var context2 = canvas.getContext("2d");
   context2.beginPath();
-  context2.fillStyle = "blue";
-  
+  context2.fillStyle = "blue"; 
   console.log(`Clicada posición x = ${cx} y y = ${cy}`);
   
   context2.fillRect( ((cw*cx)-(cw-1)), ((cw*cy)-(cw-1)), cw-1, cw-1);
-
+  const messageBody = { type: 'movement', x: cx, y: cy };
+  webSocket.send(JSON.stringify(messageBody));
   /*for (let cx = 1; cx < 6; cx++) { 
     for (let cy = 0; cy < 6; cy++) { 
     }
