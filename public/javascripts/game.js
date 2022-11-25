@@ -1,3 +1,5 @@
+
+
 //background width
 var bw = 400;
 
@@ -12,6 +14,10 @@ var cw = 80;
 
 var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d");
+
+//SQUARE CANVAS
+
+
 
 function drawBoard() {
   for (var x = 0; x <= bw; x += cw) {

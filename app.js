@@ -9,7 +9,7 @@ var registerRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
 var gameAppRouter = require('./routes/game-app');
 var gameRouter = require('./routes/game');
-const { socket } = require('../FP210-P3-console.log-playx/controllers/roomController');
+//const { socket } = require('../FP210-P3-console.log-playx/controllers/roomController');
 const { randomUUID } = require('crypto');
 const { join } = require('path');
 
@@ -33,9 +33,9 @@ sockserver.on('connection', function  connection (ws)  {
   });
   ws.onmessage = (webSocketMessage) => {
     const messageBody = JSON.parse(webSocketMessage.data);
-    console.log(messageBody.x);
+    console.log(messageBody.position);
     console.log(messageBody);
-    const data = JSON.stringify({'type': 'movement', 'x': messageBody.x, 'y':messageBody.y});
+    const data = JSON.stringify({'type': 'movement', 'position': messageBody.position});
     [...clients.keys()].forEach((client) => {
       client.send(JSON.stringify(data));
     });

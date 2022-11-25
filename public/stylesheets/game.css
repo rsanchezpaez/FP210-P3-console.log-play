@@ -1,7 +1,26 @@
-body {
-  background: lightblue;
+
+#wrapper-main{
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(174, 253, 140);
+  padding: 40px;
 }
-#canvas {
-  background: #fff;
-  margin: 20px;
+
+#wrapper-game{
+  
+  width: 100%;
+  height: 100%;
+  border: solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#board-game{
+  width: 600px;
+  height: 600px;
+  background-color: rgb(241, 249, 235);
+  padding-left: 45px;
+  padding-top: 35px;
 }
