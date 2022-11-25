@@ -36,8 +36,13 @@ block content
       el.innerHTML = data.message;
       }
       if (data.type == 'movement') {
-        $('#'+data.position).css('background-color: black');
-        document.getElementById(data.position).style.backgroundColor = 'red'
+        $("#"+data.position).css('background-color','hsl(+'+data.color+',50%,50%)');
+        $("#"+data.position).addClass(''+data.color+'');
+        $("#"+data.position).css("cursor", "not-allowed");
+        $("#"+data.position).css("pointer-events", "none");
+        var numItems = $('.'+data.color).length
+     
+        
       }
       };
       $(function() {
@@ -82,5 +87,4 @@ block content
       
 
 block scripts
-  script(src="/javascripts/game.js")  
-  
+

@@ -35,7 +35,9 @@ sockserver.on('connection', function  connection (ws)  {
     const messageBody = JSON.parse(webSocketMessage.data);
     console.log(messageBody.position);
     console.log(messageBody);
-    const data = JSON.stringify({'type': 'movement', 'position': messageBody.position});
+ 
+    const metadata = clients.get(ws);
+    const data = JSON.stringify({'type': 'movement', 'position': messageBody.position,'color': metadata.color});
     [...clients.keys()].forEach((client) => {
       client.send(JSON.stringify(data));
     });
