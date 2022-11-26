@@ -34,13 +34,42 @@ block content
       if (data.type == 'message') {
       el = document.getElementById('time');
       el.innerHTML = data.message;
+      console.log(data);
+      if (typeof data.yourcolor !== 'undefined') {
+        console.log(localStorage.getItem("mycolor"));
+        if (localStorage.getItem("mycolor")==null){
+          console.log(localStorage.getItem("mycolor"));
+          localStorage.setItem("mycolor", data.yourcolor);
+          console.log(localStorage.getItem("mycolor"));
+        }
+      }
       }
       if (data.type == 'movement') {
         $("#"+data.position).css('background-color','hsl(+'+data.color+',50%,50%)');
         $("#"+data.position).addClass(''+data.color+'');
         $("#"+data.position).css("cursor", "not-allowed");
         $("#"+data.position).css("pointer-events", "none");
-        var numItems = $('.'+data.color).length
+        console.log(data.color);
+        console.log(localStorage.getItem("mycolor"));
+        if (data.color==localStorage.getItem("mycolor")){
+        if ($('.'+data.color).length>12)
+          {
+            
+            $(".canvas").css("cursor", "not-allowed");
+            $(".canvas").css("pointer-events", "none");
+            window.alert("You Won");
+          }
+        document.getElementById("mycounter").innerHTML='My score: '+$('.'+data.color).length;
+        }
+        else {
+        if ($('.'+data.color).length>12)
+          {
+            $(".canvas").css("cursor", "not-allowed");
+            $(".canvas").css("pointer-events", "none");
+            window.alert("Your Opponent Won");
+          }
+        document.getElementById("oponentcounter").innerHTML='Oponent score: '+$('.'+data.color).length;
+        }
      
         
       }
@@ -56,6 +85,9 @@ block content
         console.log("entro");
       };
     #wrapper-main 
+      p#time
+      p#mycounter My score 0
+      p#oponentcounter Oponent score 0
       #wrapper-game
         #board-game
           canvas#id-1.canvas(width='100' height='100' style='border:1px solid #000000;')
@@ -83,7 +115,7 @@ block content
           canvas#id-23.canvas(width='100' height='100' style='border:1px solid #000000;')
           canvas#id-24.canvas(width='100' height='100' style='border:1px solid #000000;')
           canvas#id-25.canvas(width='100' height='100' style='border:1px solid #000000;')
-      p#time
+
       
 
 block scripts

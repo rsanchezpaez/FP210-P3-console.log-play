@@ -62,8 +62,15 @@ function joine(ws){
     clients.set(ws, metadata);
     console.log('Player 2 has connected! ID: '+id);
     sockserver.clients.forEach((client) => {
-      const data = JSON.stringify({'type': 'message', 'message': 'Start the game'});
+      if(client=ws){
+      const data = JSON.stringify({'type': 'message', 'message': 'Start the game','yourcolor':metadata.color,'player':'second'});
       client.send(data);
+      }
+      else {
+        const data = JSON.stringify({'type': 'message', 'message': 'Start the game'});
+        client.send(data);
+      }
+      
   });
     //const data = JSON.stringify({'type': 'time', 'time': new Date().toTimeString()});
     //ws.send(data);
@@ -75,7 +82,7 @@ function joine(ws){
     clients.set(ws, metadata);
     unmatched=id;
     console.log('Player 1 has connected! ID: '+id);
-    const data = JSON.stringify({'type': 'message', 'message': 'Wait for an opponent'});
+    const data = JSON.stringify({'type': 'message', 'message': 'Wait for an opponent','yourcolor':metadata.color,'player':'first'});
     ws.send(data);
   }
  
