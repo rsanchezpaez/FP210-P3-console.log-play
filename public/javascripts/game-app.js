@@ -1,5 +1,24 @@
+    let clientId=null;
+    let gameId = null;
+    let playerColor = null;
 
+    //Server message
+    let ws = new WebSocket("ws://localhost:9090")
+    ws.onmessage = message =>{
+        //message.data
+        const response = JSON.parse(message.data);
+        //connect
+        if(response.method==="connect"){
+            clientId=response.clientId;
+            console.log("cliend id set successfully " + clientId);
+        }
+        if(response.method==="create"){
+            gameId = response.game.id;
+            console.log("Game succesfully created with id " + response.game.id+ " with "+ response.game.balls );
 
+        }
+
+    }
     var mymodal = $('myModal');
         //MODAL POPUP
         $('#myModal').on('click', 'button.close', function (eventObject) {
@@ -48,6 +67,15 @@
         * @param  {Event} ev event that trigger the function
         */
         function drop(ev) {
+            console.log("room");
+
+            const payLoad = {
+                "method": "create",
+                "clientId": clientId
+            }
+            ws.send(JSON.stringify(payLoad));
+
+
             var data = ev.dataTransfer.getData("text");
             if (ev.target.id != "user-name") {
                 fetch('/ocupation?room=' + ev.target.id + '&user=' + user.username).then(response => {
@@ -225,6 +253,9 @@
         $(document).ready(function () {
             $("#containerRooms").hide().fadeIn(3000);
             $("#wrapper-main").hide().fadeIn(1000);
+
+
+
         });
 
         /**
@@ -232,6 +263,7 @@
         * @param  {Number} roomNumber Number of the selected room.
         */
         function roomSelected(roomNumber) {
+
 
             $("#room1").css("background-color", "rgb(58, 140, 255)")
             $("#room2").css("background-color", "rgb(58, 140, 255)")
@@ -258,3 +290,5 @@
                 // code block
             }
         }
+
+
