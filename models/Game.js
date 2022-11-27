@@ -3,10 +3,11 @@ const Room = require("./Room");
 
 class Game {
   
-  constructor(number, room) {
+  constructor(number, room, result, winner) {
     this.number = number;
     this.room = room;
-
+    this.result = result;
+    this.winner = winner;
   }
   getNumber() {
     return this.number;
@@ -14,7 +15,18 @@ class Game {
   setNumber(newNumber) {
     this.number = newNumber;
   }
-
+  getResult() {
+    return this.result;
+  }
+  setResult(result) {
+    this.result = result;
+  }
+  getWinner() {
+    return this.winner;
+  }
+  setResult(winner) {
+    this.winner = winner;
+  }
   getRoomId() {
     return this.room.getNumber();
   }

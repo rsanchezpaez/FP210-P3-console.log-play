@@ -59,7 +59,12 @@ function ocupation(request, response) {
   console.log(typeof(request.query.user))
   
   var chosen_room = rooms.find(room => room.number === request.query.room);
-  console.log(chosen_room)
+  var user_in_room = rooms.find(room => room.player1 === request.query.user);
+  var user2_in_room = rooms.find(room => room.player2 === request.query.user);
+  console.log(chosen_room);
+  console.log(user2_in_room);
+  console.log(user_in_room);
+  if (typeof user_in_room===undefined && typeof user2_in_room===undefined){
   if( chosen_room != undefined){
       if (chosen_room.player1 != '' && chosen_room.player2 != '') {
         console.log("sala ocupada")
@@ -78,7 +83,10 @@ function ocupation(request, response) {
   }else{
     response.writeHead(404, { "Content-Type": "text/html" });
   }
-  
+} else{
+  response.writeHead(201, { "Content-Type": "text/html" });
+}
+
   response.end();
 }
 

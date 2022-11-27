@@ -1,37 +1,91 @@
-document.body.onmousemove = (evt) => {
-    const messageBody = { x: evt.clientX, y: evt.clientY };
-    ws.send(JSON.stringify(messageBody));
-};
-ws.onmessage = (webSocketMessage) => {
-    const messageBody = JSON.parse(webSocketMessage.data);
-    const cursor = getOrCreateCursorFor(messageBody);
-    cursor.style.transform = `translate(${messageBody.x}px, ${messageBody.y}px)`;
-};
-function getOrCreateCursorFor(messageBody) {
-    const sender = messageBody.sender;
-    const existing = document.querySelector(`[data-sender='${sender}']`);
-    if (existing) {
-        return existing;
+localStorage.removeItem("mycolor");
+var user = JSON.parse(localStorage.getItem('User'));
+console.log('User:'+user);
+if(user==null ) {window.alert("No se puede acceder directamente");window.location.href = "http://localhost:3000/";}
+if(user.room1==false && user.room2==false & user.room3==false) {window.alert("No se puede acceder sin sala");window.location.href = "http://localhost:3000/game-app";}
+let room="";
+if(user.room1==true){room="room1"};
+if(user.room2==true){room="room2"};
+if(user.room3==true){room="room3"};
+
+const webSocket = new WebSocket('ws://localhost:443/ws/?room='+room+'&username='+user.username);
+let el;
+function fade(element) {
+var op = 1;  // initial opacity
+var timer = setInterval(function () {
+if (op <= 0.1){
+clearInterval(timer);
+element.style.display = 'none';
+}
+element.style.opacity = op;
+element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+op -= op * 0.1;
+}, 100);
+}
+function unfade(element) {
+var op = 0.1;  // initial opacity
+element.style.display = 'block';
+var timer = setInterval(function () {
+if (op >= 1){
+clearInterval(timer);
+}
+element.style.opacity = op;
+element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+op += op * 0.1;
+}, 100);
+}
+webSocket.onmessage = (event) => {
+const data = JSON.parse(event.data);
+if (data.type == 'message') {
+el = document.getElementById('time');
+el.innerHTML = data.message;
+console.log(data);
+if (typeof data.yourcolor !== 'undefined') {
+  console.log(localStorage.getItem("mycolor"));
+  if (localStorage.getItem("mycolor")==null){
+    console.log(localStorage.getItem("mycolor"));
+    localStorage.setItem("mycolor", data.yourcolor);
+    console.log(localStorage.getItem("mycolor"));
+  }
+}
+}
+if (data.type == 'movement') {
+  $("#"+data.position).css('background-color','hsl(+'+data.color+',50%,50%)');
+  $("#"+data.position).addClass(''+data.color+'');
+  $("#"+data.position).css("cursor", "not-allowed");
+  $("#"+data.position).css("pointer-events", "none");
+  console.log(data.color);
+  console.log(localStorage.getItem("mycolor"));
+  if (data.color==localStorage.getItem("mycolor")){
+  if ($('.'+data.color).length>12)
+    {
+      
+      $(".canvas").css("cursor", "not-allowed");
+      $(".canvas").css("pointer-events", "none");
+      window.alert("You Won");
     }
-    const template = document.getElementById('cursor');
-    const cursor = template.content.firstElementChild.cloneNode(true);
-    const svgPath = cursor.getElementsByTagName('path')[0];
+  document.getElementById("mycounter").innerHTML='My score: '+$('.'+data.color).length;
+  }
+  else {
+  if ($('.'+data.color).length>12)
+    {
+      $(".canvas").css("cursor", "not-allowed");
+      $(".canvas").css("pointer-events", "none");
+      window.alert("Your Opponent Won");
+    }
+  document.getElementById("oponentcounter").innerHTML='Oponent score: '+$('.'+data.color).length;
+  }
 
-    cursor.setAttribute("data-sender", sender);
-    svgPath.setAttribute('fill', `hsl(${messageBody.color}, 50%, 50%)`);
-    document.body.appendChild(cursor);
-
-    return cursor;
+  
 }
+};
+$(function() {
+$(".canvas").on("click", makeMove);
+});
+function makeMove(e) {
+  
+ const messageBody = { type: 'movement', position: $(this).attr('id'),"room":room };
+  webSocket.send(JSON.stringify(messageBody));
 
-async function connectToServer() {
-    const ws = new WebSocket('ws://localhost:443/ws');
-    return new Promise((resolve, reject) => {
-        const timer = setInterval(() => {
-            if(ws.readyState === 1) {
-                clearInterval(timer)
-                resolve(ws);
-            }
-        }, 10);
-    });
-}
+  console.log("entro");
+};
