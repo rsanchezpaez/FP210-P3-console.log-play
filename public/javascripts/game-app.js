@@ -63,6 +63,7 @@
                         ev.target.appendChild(nodeCopy);
                         roomSelected(ev.target.id);
                         document.getElementById(ev.target.id).innerHTML = document.getElementById(ev.target.id).innerHTML + '<input class="btn btn-primary" type="button" value="Get out" onClick=getOutRoom("' + ev.target.id + '","' + user.username + '") />';
+                        document.getElementById(ev.target.id).innerHTML = document.getElementById(ev.target.id).innerHTML + '<br /><a href="/game">Entrar</a>';                    
                     }
                     else {
                         document.getElementById("alert-text").innerHTML = 'Room is full. Try another one';

@@ -132,6 +132,13 @@
             align-items: center;
             border-radius: 10px 10px 0px 0px;
         }
+        .wrapper-foot{
+            background-color: #ffffe6;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
         .room {
             background-color: rgb(58, 140, 255);

@@ -3,7 +3,17 @@ extends layout
 block content
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
     script.
-      const webSocket = new WebSocket('ws://localhost:443/ws');
+      localStorage.removeItem("mycolor");
+      var user = JSON.parse(localStorage.getItem('User'));
+      console.log('User:'+user);
+      if(user==null ) {window.alert("No se puede acceder directamente");window.location.href = "http://localhost:3000/";}
+      if(user.room1==false && user.room2==false & user.room3==false) {window.alert("No se puede acceder sin sala");window.location.href = "http://localhost:3000/game-app";}
+      let room="";
+      if(user.room1==true){room="room1"};
+      if(user.room2==true){room="room2"};
+      if(user.room3==true){room="room3"};
+
+      const webSocket = new WebSocket('ws://localhost:443/ws/?room='+room+'&username='+user.username);
       let el;
       function fade(element) {
       var op = 1;  // initial opacity
@@ -79,12 +89,13 @@ block content
       });
       function makeMove(e) {
         
-       const messageBody = { type: 'movement', position: $(this).attr('id') };
+       const messageBody = { type: 'movement', position: $(this).attr('id'),"room":room };
         webSocket.send(JSON.stringify(messageBody));
 
         console.log("entro");
       };
     #wrapper-main 
+      h1#head
       p#time
       p#mycounter My score 0
       p#oponentcounter Oponent score 0
@@ -115,8 +126,9 @@ block content
           canvas#id-23.canvas(width='100' height='100' style='border:1px solid #000000;')
           canvas#id-24.canvas(width='100' height='100' style='border:1px solid #000000;')
           canvas#id-25.canvas(width='100' height='100' style='border:1px solid #000000;')
-
-      
+    script.
+      document.getElementById("head").innerHTML="Welcome user: "+user.username+" to "+room;
 
 block scripts
+
 
