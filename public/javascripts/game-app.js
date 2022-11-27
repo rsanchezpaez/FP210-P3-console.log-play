@@ -2,7 +2,7 @@
     let gameId = null;
     let playerColor = null;
 
-    //Server message
+    //Server->Cliente message
     let ws = new WebSocket("ws://localhost:9090")
     ws.onmessage = message =>{
         //message.data
@@ -11,14 +11,60 @@
         if(response.method==="connect"){
             clientId=response.clientId;
             console.log("cliend id set successfully " + clientId);
+            //gameCreation();
         }
         if(response.method==="create"){
             gameId = response.game.id;
             console.log("Game succesfully created with id " + response.game.id+ " with "+ response.game.balls );
+            
 
         }
+         //join
+         if(response.method==="join"){
+            const game = response.game;
+            game.clients.forEach(c => {
+                if(c.clientId === clientId) playerColor=c.color;
+                console.log("Color:" +  c.color);
+            })
+
+        }
+    }
+
+    function gameCreation(){
+        let payLoad = {
+            "method": "create",
+            "clientId": clientId
+        }
+        ws.send(JSON.stringify(payLoad));
 
     }
+
+
+    function gameJoin(room) {
+       let roomInt= 1;
+
+        switch (room) {
+
+            case "room1":
+                roomInt= 1;break;
+            case "room2":
+                roomInt= 2;break;
+            case "room3":
+                roomInt= 3;break;
+        }
+
+        const payLoad = {
+        "method": "join",
+        "clientId": clientId,
+        "gameId": roomInt
+         }
+        ws.send(JSON.stringify(payLoad));
+
+        
+    }
+
+
+
     var mymodal = $('myModal');
         //MODAL POPUP
         $('#myModal').on('click', 'button.close', function (eventObject) {
@@ -67,15 +113,8 @@
         * @param  {Event} ev event that trigger the function
         */
         function drop(ev) {
-            console.log("room");
-
-            const payLoad = {
-                "method": "create",
-                "clientId": clientId
-            }
-            ws.send(JSON.stringify(payLoad));
-
-
+                     
+                   
             var data = ev.dataTransfer.getData("text");
             if (ev.target.id != "user-name") {
                 fetch('/ocupation?room=' + ev.target.id + '&user=' + user.username).then(response => {
@@ -90,6 +129,7 @@
                         nodeCopy.id = "newId"
                         ev.target.appendChild(nodeCopy);
                         roomSelected(ev.target.id);
+                        gameJoin(ev.target.id);
                         document.getElementById(ev.target.id).innerHTML = document.getElementById(ev.target.id).innerHTML + '<input class="btn btn-primary" type="button" value="Get out" onClick=getOutRoom("' + ev.target.id + '","' + user.username + '") />';
                     }
                     else {
@@ -254,9 +294,9 @@
             $("#containerRooms").hide().fadeIn(3000);
             $("#wrapper-main").hide().fadeIn(1000);
 
-
-
         });
+
+      
 
         /**
         * Change the color of a selected room from blue to red, the unselected ones will be painted again in blue.
@@ -290,5 +330,7 @@
                 // code block
             }
         }
+
+  
 
 

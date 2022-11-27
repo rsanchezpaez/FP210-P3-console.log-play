@@ -60,6 +60,28 @@ app.listen(9091, ()=> console.log("listening clients on 9091"))
 const clients  = {};
 const games= {};
 
+//Creation of rooms
+let gameId = 1;
+games[gameId] = {
+  "id": gameId,
+  "balls": 20,
+  "clients" : []
+}
+gameId = 2;
+games[gameId] = {
+  "id": gameId,
+  "balls": 20,
+  "clients" : []
+}
+gameId = 3;
+games[gameId] = {
+  "id": gameId,
+  "balls": 20,
+  "clients" : []
+}
+
+
+
 const wsServer = new websocketServer({
   "httpServer": httpServer
 })
@@ -86,7 +108,7 @@ wsServer.on("request", request => {
               "method": "create",
               "game": games[gameId]
           }
-          console.log("hola")
+
           const con=  clients[clientId].connection;
           con.send(JSON.stringify(payLoad));
 
@@ -94,6 +116,7 @@ wsServer.on("request", request => {
 
       //client want to join
       if(result.method === "join"){
+        //updateGamesRoom();
 
           const clientId = result.clientId;
           const gameId = result.gameId;
@@ -108,8 +131,9 @@ wsServer.on("request", request => {
               "color": color
           })
           //starting the game
-          if(game.clients.length === 3){
-              updateGameState();
+          if(game.clients.length === 2){
+              //updateGameState();
+              startCombat();
           }
 
           const payLoad = {
@@ -172,8 +196,14 @@ function updateGameState(){
           clients[c.clientId].connection.send(JSON.stringify(payLoad))
       })
   }
-
   setTimeout(updateGameState,500);
+}
+
+
+
+function startCombat(){
+
+  app.use('/', loginRouter);
 }
 
 
