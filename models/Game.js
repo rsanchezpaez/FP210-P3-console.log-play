@@ -3,11 +3,13 @@ const Room = require("./Room");
 
 class Game {
   
-  constructor(number, room, result, winner) {
+  constructor(number, room, result, winner,player1,player2) {
     this.number = number;
     this.room = room;
     this.result = result;
     this.winner = winner;
+    this.player1 = player1;
+    this.player2 = player2;
   }
   getNumber() {
     return this.number;
@@ -27,18 +29,26 @@ class Game {
   setResult(winner) {
     this.winner = winner;
   }
-  getRoomId() {
-    return this.room.getNumber();
+  getRoom() {
+    return this.room;
+  }
+  setRoom(room) {
+    this.room = room;
+  }
+  getPlayer1(){
+    return player1;
   }
 
-  getUser1(){
-    return this.room.getPlayer1();
+  getPlayer2(){
+    return player2;
+  }
+  setPlayer1(){
+    this.player1 = player1;
   }
 
-  getUser2(){
-    return this.room.getPlayer2();
+  setPlayer2(){
+    this.player2 = player2;
   }
-
 }
 
 module.exports = Game;

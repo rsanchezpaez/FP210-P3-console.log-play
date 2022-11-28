@@ -41,12 +41,16 @@ el = document.getElementById('time');
 el.innerHTML = data.message;
 console.log(data);
 if (typeof data.yourcolor !== 'undefined') {
+  $("#team1").css('background-color','hsl('+data.yourcolor+',50%,50%)');
   console.log(localStorage.getItem("mycolor"));
   if (localStorage.getItem("mycolor")==null){
     console.log(localStorage.getItem("mycolor"));
     localStorage.setItem("mycolor", data.yourcolor);
     console.log(localStorage.getItem("mycolor"));
   }
+}
+if (typeof data.opponentcolor !== 'undefined') {
+  $("#team2").css('background-color','hsl('+data.opponentcolor+',50%,50%)');
 }
 }
 if (data.type == 'movement') {
@@ -64,7 +68,7 @@ if (data.type == 'movement') {
       $(".canvas").css("pointer-events", "none");
       window.alert("You Won");
     }
-  document.getElementById("mycounter").innerHTML='My score: '+$('.'+data.color).length;
+  document.getElementById("team1").innerHTML=$('.'+data.color).length;
   }
   else {
   if ($('.'+data.color).length>12)
@@ -73,7 +77,7 @@ if (data.type == 'movement') {
       $(".canvas").css("pointer-events", "none");
       window.alert("Your Opponent Won");
     }
-  document.getElementById("oponentcounter").innerHTML='Oponent score: '+$('.'+data.color).length;
+  document.getElementById("team2").innerHTML=$('.'+data.color).length;
   }
 
   

@@ -63,7 +63,8 @@
                         ev.target.appendChild(nodeCopy);
                         roomSelected(ev.target.id);
                         document.getElementById(ev.target.id).innerHTML = document.getElementById(ev.target.id).innerHTML + '<input class="btn btn-primary" type="button" value="Get out" onClick=getOutRoom("' + ev.target.id + '","' + user.username + '") />';
-                        document.getElementById(ev.target.id+"f").innerHTML = '<a href="/game">Entrar</a>';                    
+                        document.getElementById(ev.target.id+"f").innerHTML = '<a href="/game">Entrar</a>';
+                        document.getElementById("avatarChoose").setAttribute('draggable', false);                    
                     }
                     /**
                     * user is alrealdy in other room
@@ -100,6 +101,7 @@
                     document.getElementById(room).innerHTML = '<i id="o' + room + '"></i>';
                     document.getElementById(room+"f").innerHTML = '<i id="' + room + 'f"></i>';
                     document.getElementById(room).style.backgroundColor = 'rgb(58, 140, 255)';
+                    document.getElementById("avatarChoose").setAttribute('draggable', true);
                 }
                 else {
                     document.getElementById("alert-text").innerHTML = 'Error leaving the room';

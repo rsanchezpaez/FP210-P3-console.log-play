@@ -7,8 +7,13 @@ block content
     #wrapper-main 
       h1#head
       p#time
-      p#mycounter My score 0
-      p#oponentcounter Oponent score 0
+      div
+        .btncontainer
+          h2 Your Score 
+          #team1.btn 0
+        .btncontainer
+          h2 Opponent
+          #team2.btn 0      
       #wrapper-game
         #board-game
           canvas#id-1.canvas(width='100' height='100' style='border:1px solid #000000;')
