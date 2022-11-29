@@ -42,11 +42,11 @@ class Game {
   getPlayer2(){
     return player2;
   }
-  setPlayer1(){
+  setPlayer1(player1){
     this.player1 = player1;
   }
 
-  setPlayer2(){
+  setPlayer2(player2){
     this.player2 = player2;
   }
 }

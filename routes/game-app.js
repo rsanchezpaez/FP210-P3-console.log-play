@@ -51,6 +51,8 @@ sockserver.on('connection', (ws,req) =>  {
 };
    ws.on('close', () => {
     console.log('Client has disconnected!');
+    players[ws.room]=0;
+    colors[ws.room]="";
     clients.delete(ws);
    });
 
@@ -76,12 +78,14 @@ function joine(ws,req){
     console.log('Player 2 has connected! ID: '+id);
     console.log(players);
     sockserver.clients.forEach((client) => {
-      if(client==ws){
+      if(client===ws){
       const data = JSON.stringify({'type': 'message', 'message': 'Start the game','yourcolor':metadata.color,'opponentcolor':colors[room],'player':'second','room':metadata.room,'username':metadata.username});
       client.send(data);
       }
       else {
-        if (client.room==ws.room){
+        if (client.room===ws.room){
+          client.game.setPlayer2(username);
+          console.log(client.game(getPlayer2));
         const data = JSON.stringify({'type': 'message', 'message': 'Start the game','opponentcolor':metadata.color});
         client.send(data);
       }
@@ -99,6 +103,7 @@ function joine(ws,req){
     colors[room]=color;
     console.log("Fijado color"+colors[room]);
     ws.room=parameters.room;
+    ws.game=game;
     clients.set(ws, metadata);
     unmatched=room;
     console.log("unmatch"+unmatched);
