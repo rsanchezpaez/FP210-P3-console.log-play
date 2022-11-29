@@ -1,9 +1,49 @@
 extends layout
 
 block content
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+ 
 
-  div
-    canvas#canvas(width='400' height='400' style='border:1px solid #000000;')
+    #wrapper-main 
+      h1#head
+      p#time
+      div
+        .btncontainer
+          h2 Your Score 
+            canvas#TeamColor.canvas(width='15' height='15' style='border:1px solid #000000;')
+          #team1.btn 0
+        .btncontainer
+          h2 Opponent
+          #team2.btn 0      
+      #wrapper-game
+        #board-game
+          canvas#id-1.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-2.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-3.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-4.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-5.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-6.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-7.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-8.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-9.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-10.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-11.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-12.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-13.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-14.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-15.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-16.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-17.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-18.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-19.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-20.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-21.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-22.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-23.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-24.canvas(width='100' height='100' style='border:1px solid #000000;')
+          canvas#id-25.canvas(width='100' height='100' style='border:1px solid #000000;')
+    script.
 
 block scripts
+
   script(src="/javascripts/game.js")  

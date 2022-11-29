@@ -1,7 +1,8 @@
     let clientId=null;
     let gameId = null;
     let playerColor = null;
-
+    let changedWindows= false;
+/*
     //Server->Cliente message
     let ws = new WebSocket("ws://localhost:9090")
     ws.onmessage = message =>{
@@ -28,8 +29,21 @@
             })
 
         }
-    }
 
+        if (response.method === "update"){
+            if (changedWindows== false){
+                //fetch('/login').then(response => {
+                 //   window.location.assign(response.url)
+               // })
+              //  changedWindows=true;
+            }
+                console.log("updated");
+            
+
+        }
+
+    }
+*/
     function gameCreation(){
         let payLoad = {
             "method": "create",
@@ -99,6 +113,7 @@
             })
         })
 
+
         //DRAG AND DROP
 
         function allowDrop(ev) {
@@ -129,7 +144,7 @@
                         nodeCopy.id = "newId"
                         ev.target.appendChild(nodeCopy);
                         roomSelected(ev.target.id);
-                        gameJoin(ev.target.id);
+                        //gameJoin(ev.target.id);
                         document.getElementById(ev.target.id).innerHTML = document.getElementById(ev.target.id).innerHTML + '<input class="btn btn-primary" type="button" value="Get out" onClick=getOutRoom("' + ev.target.id + '","' + user.username + '") />';
                     }
                     else {

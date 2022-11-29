@@ -90,7 +90,9 @@ wsServer.on("request", request => {
   const connection = request.accept(null,request.origin);
   connection.on("open", () => console.log("opened"))
   connection.on("close", () => console.log("closed"))
+  
   connection.on("message", message => {
+
 
       const result = JSON.parse(message.utf8Data)
       //received something from the client
@@ -116,8 +118,6 @@ wsServer.on("request", request => {
 
       //client want to join
       if(result.method === "join"){
-        //updateGamesRoom();
-
           const clientId = result.clientId;
           const gameId = result.gameId;
           const game = games[gameId];
@@ -132,8 +132,8 @@ wsServer.on("request", request => {
           })
           //starting the game
           if(game.clients.length === 2){
-              //updateGameState();
-              startCombat();
+              updateGameState();
+              //startCombat();
           }
 
           const payLoad = {
@@ -157,9 +157,6 @@ wsServer.on("request", request => {
               state={}
           state[ballId] = color;
           games[gameId].state = state;
-
-
-
       }   
 
 
