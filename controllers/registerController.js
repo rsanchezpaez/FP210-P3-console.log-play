@@ -1,19 +1,17 @@
 const users = require('../models/UserRegisters').usersDB;
 const Player = require('../models/Player');
 
-function register(rel,res,next){
-  res.render('register', {title: 'hi', name: 'register.css'});
-  res.end();
+function register(request,response){
+  response.render('register', {title: 'Register', name: 'register.css'});
+  response.end();
 }
 
-function validatedRegister(rel,res,next){
+function validatedRegister(request,response){
   
-  const newUser = new Player(rel.body.name, rel.body.username, rel.body.password);
+  const newUser = new Player(request.body.name, request.body.username, request.body.password);
   users.push(newUser);
-  console.log(newUser)
-  res.end()
+  response.end()
 }
-
 
 exports.register = register;
 exports.validatedRegister = validatedRegister;

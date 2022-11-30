@@ -1,6 +1,5 @@
 
 #wrapper-main{
-  position:absolute;
   width: 100%;
   height: 100%;
   background-color: rgb(174, 253, 140);
@@ -8,7 +7,6 @@
 }
 
 #wrapper-game{
-  
   width: 100%;
   height: 100%;
   border: solid black;
