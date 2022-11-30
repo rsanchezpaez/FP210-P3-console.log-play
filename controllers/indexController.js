@@ -1,36 +1,30 @@
 const users = require('../models/UserRegisters').usersDB;
 
-function init(rel,res,next){
-  res.render('index', {name: 'login.css'});
-  res.end();
+function init(request, response) {
+  response.render('index', { name: 'login.css' });
+  response.end();
 }
 
-function login(rel,res,next){
-  var item = users.find(item => item.username === rel.body.username);
-  console.log(item);
-  console.log(users)
-  console.log(rel.body.username)
+function login(request, response) {
+  var item = users.find(item => item.username === request.body.username);
   if (item !== undefined) {
-      if (item.username === rel.body.username && item.password === rel.body.password) {
-          res.writeHead(200, { "Content-Type": "text/html" });
-          res.end();
-      }
+    if (item.username === request.body.username && item.password === request.body.password) {
+      response.writeHead(200, { "Content-Type": "text/html" });
+      response.end();
+    }
 
-
-      if (item.username === rel.body.username && item.password !== rel.body.password) {
-          //PASSWORD INCORRECT
-          res.writeHead(404, { "Content-Type": "text/html" });
-          res.end();
-      }
+    if (item.username === request.body.username && item.password !== request.body.password) {
+      response.writeHead(404, { "Content-Type": "text/html" });
+      response.end();
+    }
   }
 
   if (item === undefined) {
-      //USER DOESN'T EXISTS
-      res.writeHead(404, { "Content-Type": "text/html" });
-      res.end();
+    response.writeHead(404, { "Content-Type": "text/html" });
+    response.end();
   }
- 
-  res.end()
+
+  response.end()
 }
 
 exports.init = init;

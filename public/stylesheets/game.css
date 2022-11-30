@@ -1,7 +1,66 @@
-body {
-  background: lightblue;
+
+#wrapper-main{
+  width: 100%;
+  height: 100%;
+  background-color: rgb(174, 253, 140);
+  padding: 40px;
 }
-#canvas {
-  background: #fff;
-  margin: 20px;
+
+#wrapper-game{
+  width: 100%;
+  height: 100%;
+  border: solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+#board-game{
+  width: 600px;
+  height: 600px;
+  background-color: rgb(241, 249, 235);
+  padding-left: 45px;
+  padding-top: 35px;
+}
+.btn {
+  width: 150px;
+  margin-top: 0px;
+  cursor: default;
+  height: 150px;
+  border: 0;
+  border-radius: 20px;
+  outline: none !important;
+  font-size: 80px;
+  font-family: rubik;
+  text-shadow: 3px 3px 5px;
+  display: block;
+  position: relative;
+  z-index: 5;
+  top: 15px;
+}
+
+#team1 {
+  background-color: #e85c5c;
+  box-shadow: inset 0 -5px 1px #842f2f, 6px 7px 3px rgba(66, 66, 66, 0.5);
+}
+#team2 {
+  background-color: #60e85c;
+  box-shadow: inset 0 -5px 1px #37842f, 6px 7px 3px rgba(66, 66, 66, 0.5);
+}
+
+.btncontainer {
+  display: inline-block;
+  margin: 0 45px 20px 45px;
+  text-align: center;
+}
+  h2 {
+    font-family: rubik;
+    font-size: 25px;
+    background-color: #f7ff66;
+    color: #383838;
+    border-radius: 10px;
+    font-weight: 800;
+    padding: 10px 15px 15px 15px;
+    box-shadow: inset 0 -5px 1px #5a5e11, 6px 7px 3px rgba(66, 66, 66, 0.5);
+  }
+

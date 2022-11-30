@@ -1,7 +1,7 @@
 
-function renderGame(rel,res,next){
-  res.render('game', {title: 'Prueba', name: 'game.css'});
-  res.end();
+function renderGame(request,response){
+  response.render('game', {title: 'Game', name: 'game.css'});
+  response.end();
 }
 
 exports.renderGame = renderGame;

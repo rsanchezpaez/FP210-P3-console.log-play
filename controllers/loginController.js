@@ -10,16 +10,13 @@ function login(request, response) {
             response.end();
         }
 
-
         if (item.username === request.body.username && item.password !== request.body.password) {
-            //PASSWORD INCORRECT
             response.writeHead(404, { "Content-Type": "text/html" });
             response.end();
         }
     }
 
     if (item === undefined) {
-        //USER DOESN'T EXISTS
         response.writeHead(404, { "Content-Type": "text/html" });
         response.end();
     }
@@ -29,7 +26,6 @@ function login(request, response) {
 
 function logOut(request, response) {
 
-    console.log(request.query)
     var userNameLogOut = request.query.user
 
     rooms.forEach(room => {
@@ -38,14 +34,12 @@ function logOut(request, response) {
                 var value = room[key];
                 if (value === userNameLogOut) {
                     room[key] = '';
-                    console.log(rooms);
                 }
             }
             if (key === 'player2') {
                 var value = room[key];
                 if (value === userNameLogOut) {
                     room[key] = '';
-                    console.log(rooms);
                 }
             }
         }

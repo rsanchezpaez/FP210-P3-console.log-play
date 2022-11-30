@@ -3,13 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
-var registerRouter = require('./routes/register');
-var loginRouter = require('./routes/login');
 var gameAppRouter = require('./routes/game-app');
-var gameRouter = require('./routes/game');
-
+const { randomUUID } = require('crypto');
+const { join } = require('path');
 var app = express();
 
 // view engine setup
@@ -26,10 +23,7 @@ app.use('/bootstrap/js', express.static(__dirname + '/node_modules/bootstrap/dis
 app.use('/favicons', express.static(__dirname + '/node_modules/express-favicon/index.js'));
 
 app.use(indexRouter);
-app.use(registerRouter);
-app.use(loginRouter);
-app.use(gameAppRouter);
-app.use(gameRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
