@@ -8,7 +8,7 @@
 
         //DATA LOCALSTORAGE
         var user = JSON.parse(localStorage.getItem('User'));
-        var name = "Renata"
+        var name = user.name;
         var avatar = document.getElementById("avatarChoose");
         var userName = document.getElementById("user-name");
         userName.innerHTML = "Hi" + ' ' + user.name.toLowerCase();
