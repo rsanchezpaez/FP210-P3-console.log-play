@@ -1,6 +1,7 @@
+//const src = require("debug");
+
 localStorage.removeItem("mycolor");
 var user = JSON.parse(localStorage.getItem('User'));
-console.log('User:' + user);
 if (user == null) { window.alert("No se puede acceder directamente"); window.location.href = "http://localhost:3000/"; }
 if (user.room1 == false && user.room2 == false & user.room3 == false) { window.alert("No se puede acceder sin sala"); window.location.href = "http://localhost:3000/game-app"; }
 let room = "";
@@ -36,7 +37,6 @@ function unfade(element) {
 }
 webSocket.onmessage = (event) => {
     const data = JSON.parse(event.data);
-    console.log(data)
     if (data.type == 'message') {
         el = document.getElementById('time');
         el.innerHTML = data.message;
@@ -61,6 +61,8 @@ webSocket.onmessage = (event) => {
                 $(".canvas").css("cursor", "not-allowed");
                 $(".canvas").css("pointer-events", "none");
                 window.alert("You Won");
+                const messageBody = { type: 'result', winner: user.username, result: $('.' + data.color).length };
+                webSocket.send(JSON.stringify(messageBody));
             }
             document.getElementById("team1").innerHTML = $('.' + data.color).length;
         }
@@ -79,13 +81,61 @@ webSocket.onmessage = (event) => {
         $(".canvas").css("pointer-events", "none");
     }
 };
+
 $(function () {
     $(".canvas").on("click", makeMove);
 });
-function makeMove(e) {
 
+function makeMove(e) {
+    if ($('.'+localStorage.getItem("mycolor")).length==0){
+        $(".canvas").css("cursor", "not-allowed");
+        $(".canvas").css("pointer-events", "none");  
+      }
+      casilla=Number($(this).attr('id'))+10;
+      if (document.getElementById(casilla)){
+        document.getElementById(casilla).style.cursor="allowed";
+        document.getElementById(casilla).style.pointerEvents="all";
+      }
+      casilla=Number($(this).attr('id'))+11;
+      if (document.getElementById(casilla)){
+        document.getElementById(casilla).style.cursor="allowed";
+        document.getElementById(casilla).style.pointerEvents="all";
+      }
+      casilla=Number($(this).attr('id'))+9;
+      if (document.getElementById(casilla)){
+        document.getElementById(casilla).style.cursor="allowed";
+        document.getElementById(casilla).style.pointerEvents="all";
+      }
+      casilla=Number($(this).attr('id'))+1;
+      if (document.getElementById(casilla)){
+        document.getElementById(casilla).style.cursor="allowed";
+        document.getElementById(casilla).style.pointerEvents="all";
+      }
+      casilla=Number($(this).attr('id'))-1;
+      if (document.getElementById(casilla)){
+        document.getElementById(casilla).style.cursor="allowed";
+        document.getElementById(casilla).style.pointerEvents="all";
+      }
+      casilla=Number($(this).attr('id'))-10;
+      if (document.getElementById(casilla)){
+        document.getElementById(casilla).style.cursor="allowed";
+        document.getElementById(casilla).style.pointerEvents="all";
+      }
+      casilla=Number($(this).attr('id'))-11;
+      if (document.getElementById(casilla)){
+        document.getElementById(casilla).style.cursor="allowed";
+        document.getElementById(casilla).style.pointerEvents="all";
+      }
+      casilla=Number($(this).attr('id'))-9;
+      if (document.getElementById(casilla)){
+        document.getElementById(casilla).style.cursor="allowed";
+        document.getElementById(casilla).style.pointerEvents="all";
+      }
     const messageBody = { type: 'movement', position: $(this).attr('id'), "room": room };
     webSocket.send(JSON.stringify(messageBody));
-
-    console.log("entro");
 };
+
+$(document).ready(function(){
+    document.getElementById("head").innerHTML="Welcome "+ user.name+" to "+room;
+    $('img').attr('src', user.avatar);
+})

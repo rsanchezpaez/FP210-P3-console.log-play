@@ -26,7 +26,7 @@ class Game {
   getWinner() {
     return this.winner;
   }
-  setResult(winner) {
+  setWinner(winner) {
     this.winner = winner;
   }
   getRoom() {

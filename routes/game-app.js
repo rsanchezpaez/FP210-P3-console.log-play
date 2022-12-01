@@ -2,7 +2,7 @@ var express = require('express');
 const url = require('url');
 const Game = require("../models/Game");
 var router = express.Router();
-var {rooms} = require('../models/RoomData');
+var { rooms } = require('../models/RoomData');
 
 const { Server } = require('ws');
 // Socket server
@@ -16,33 +16,38 @@ sockserver.on('connection', (ws, req) => {
   joine(ws, req);
 
   ws.on('message', (messageAsString) => {
-    const message = JSON.parse(messageAsString);
-    const metadata = clients.get(ws);
-    message.sender = metadata.id;
-    message.color = metadata.color;
-    const outbound = JSON.stringify(message);
-    console.log("outbound", outbound);
 
-    [...clients.keys()].forEach((client) => {
-      if (client.room == message.room) {
-        client.send(outbound);
-      }
-    });
+
+    //si es de tipo result guardar en ws.game setresult y setganador
+    const message = JSON.parse(messageAsString);
+ 
+    if (message.type === 'movement') {
+      const metadata = clients.get(ws);
+      message.sender = metadata.id;
+      message.color = metadata.color;
+      const outbound = JSON.stringify(message);
+      [...clients.keys()].forEach((client) => {
+        if (client.room == message.room) {
+          client.send(outbound);
+        }
+      });
+    }
+    if(message.type === 'result'){
+      ws.game.setResult(message.result);
+      ws.game.setWinner(message.winner)
+    }
+
   });
 
   ws.on('close', () => {
-    console.log('Client has disconnected!');
     [...clients.keys()].forEach((client) => {
-      //const metadata = clients.get(ws);
-      console.log(ws)
-      console.log("antes de condicion", client.room)
       if (client.room === ws.room) {
-        console.log("enviando")
-        const data = JSON.stringify({ type: 'close', message: 'Opponent left the game' });
+        // guardar en ws.game setresult y setganador
+       
+        const data = JSON.stringify({ type: 'close', message: 'Opponent left the game. You won!' });
         client.send(data);
       }
     })
-
     const roomToDelete = rooms.find(room => room.number === ws.room);
     roomToDelete.setPlayer2("");
     roomToDelete.setPlayer1("");
@@ -64,7 +69,6 @@ function joine(ws, req) {
     const metadata = { id, color, room, username };
     ws.room = parameters.room;
     clients.set(ws, metadata);
-    console.log('Player 2 has connected! ID: ' + id);
     sockserver.clients.forEach((client) => {
       if (client === ws) {
         const data = JSON.stringify({ 'type': 'message', 'message': 'Start the game', 'yourcolor': metadata.color, 'opponentcolor': colors[room], 'player': 'second', 'room': metadata.room, 'username': metadata.username });
@@ -92,7 +96,6 @@ function joine(ws, req) {
     ws.game = game;
     clients.set(ws, metadata);
     unmatched = room;
-    console.log('Player 1 has connected! ID: ' + id);
     const data = JSON.stringify({ 'type': 'message', 'message': 'Wait for an opponent', 'yourcolor': metadata.color, 'player': 'first', 'room': metadata.room, 'username': metadata.username });
     ws.send(data);
   }
