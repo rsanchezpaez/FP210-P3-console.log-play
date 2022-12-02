@@ -5,7 +5,7 @@ for (let i of arr) {
   var str = "ctx" + i.toString() + " = canvas.getContext('2d')";
   eval(str);
   var img = new Image();
-  img.src = "../images/cemento.jpg";
+  img.src = "../images/madera.png";
   var str = "ctx" + i.toString() + ".drawImage(img, 0, 0)";
   eval(str);
   img.onload = function () {
