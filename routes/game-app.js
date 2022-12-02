@@ -16,8 +16,6 @@ sockserver.on('connection', (ws, req) => {
   joine(ws, req);
 
   ws.on('message', (messageAsString) => {
-
-
     //si es de tipo result guardar en ws.game setresult y setganador
     const message = JSON.parse(messageAsString);
  
@@ -33,6 +31,7 @@ sockserver.on('connection', (ws, req) => {
       });
     }
     if(message.type === 'result'){
+      console.log(ws)
       ws.game.setResult(message.result);
       ws.game.setWinner(message.winner)
     }
@@ -41,9 +40,8 @@ sockserver.on('connection', (ws, req) => {
 
   ws.on('close', () => {
     [...clients.keys()].forEach((client) => {
-      if (client.room === ws.room) {
+      if (client.room === ws.room) {       
         // guardar en ws.game setresult y setganador
-       
         const data = JSON.stringify({ type: 'close', message: 'Opponent left the game. You won!' });
         client.send(data);
       }
